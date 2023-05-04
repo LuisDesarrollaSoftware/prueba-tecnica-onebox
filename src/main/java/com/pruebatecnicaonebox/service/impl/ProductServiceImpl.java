@@ -4,6 +4,7 @@ import com.pruebatecnicaonebox.dao.ProductRepository;
 import com.pruebatecnicaonebox.mapper.MapperDto;
 import com.pruebatecnicaonebox.model.Product;
 import com.pruebatecnicaonebox.model.dto.ProductDto;
+import com.pruebatecnicaonebox.model.exceptions.NotFoundException;
 import com.pruebatecnicaonebox.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,9 +22,9 @@ public class ProductServiceImpl implements ProductService {
     private MapperDto mapperDto;
 
     @Override
-    public ProductDto getProductById(UUID id) {
+    public ProductDto getProductById(UUID id) throws NotFoundException {
         return mapperDto.productToProductDto(productRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Product not found with id " + id)
+                () -> new NotFoundException("Product not found with id " + id)
         ));
     }
 
@@ -36,9 +37,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public String deleteProductById(UUID id) {
+    public String deleteProductById(UUID id) throws NotFoundException {
         Product product = productRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Product not found with id " + id)
+                () -> new NotFoundException("Product not found with id " + id)
         );
         productRepository.delete(product);
         return product.getId().toString();

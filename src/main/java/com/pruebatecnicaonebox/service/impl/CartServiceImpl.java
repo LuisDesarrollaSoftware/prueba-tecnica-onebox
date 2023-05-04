@@ -6,6 +6,7 @@ import com.pruebatecnicaonebox.mapper.MapperDto;
 import com.pruebatecnicaonebox.model.Cart;
 import com.pruebatecnicaonebox.model.Product;
 import com.pruebatecnicaonebox.model.dto.CartDto;
+import com.pruebatecnicaonebox.model.exceptions.NotFoundException;
 import com.pruebatecnicaonebox.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
@@ -32,9 +33,9 @@ public class CartServiceImpl implements CartService {
     private MapperDto mapperDto;
 
     @Override
-    public CartDto getCartById(UUID id) {
+    public CartDto getCartById(UUID id) throws NotFoundException {
         return mapperDto.cartToCartDto(cartRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Cart not found with id " + id)
+                () -> new NotFoundException("Cart not found with id " + id)
         ));
     }
 
@@ -47,23 +48,23 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public String deleteCartById(UUID id) {
+    public String deleteCartById(UUID id) throws NotFoundException {
         Cart cart = cartRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Cart not found with id " + id)
+                () -> new NotFoundException("Cart not found with id " + id)
         );
         cartRepository.delete(cart);
         return cart.getId().toString();
     }
 
     @Override
-    public CartDto addProductToCart(UUID id, UUID idProduct) {
+    public CartDto addProductToCart(UUID id, UUID idProduct) throws NotFoundException {
 
         Cart cart = cartRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Cart not found with id " + id)
+                () -> new NotFoundException("Cart not found with id " + id)
         );
 
         Product product = productRepository.findById(idProduct).orElseThrow(
-                () -> new RuntimeException("Product not found with id " + id)
+                () -> new NotFoundException("Product not found with id " + id)
         );
 
         cart.getProductList().add(product);
@@ -74,14 +75,14 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public CartDto removeProductToCart(UUID id, UUID idProduct) {
+    public CartDto removeProductToCart(UUID id, UUID idProduct) throws NotFoundException {
 
         Cart cart = cartRepository.findById(id).orElseThrow(
-                () -> new RuntimeException("Cart not found with id " + id)
+                () -> new NotFoundException("Cart not found with id " + id)
         );
 
         Product product = productRepository.findById(idProduct).orElseThrow(
-                () -> new RuntimeException("Product not found with id " + id)
+                () -> new NotFoundException("Product not found with id " + id)
         );
 
         if(cart.getProductList().contains(product)){

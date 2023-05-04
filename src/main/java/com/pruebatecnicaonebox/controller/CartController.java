@@ -2,6 +2,8 @@ package com.pruebatecnicaonebox.controller;
 
 import com.pruebatecnicaonebox.model.Cart;
 import com.pruebatecnicaonebox.model.dto.CartDto;
+import com.pruebatecnicaonebox.model.exceptions.NotFoundException;
+import com.pruebatecnicaonebox.model.exceptions.OneBoxApplicationException;
 import com.pruebatecnicaonebox.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +26,7 @@ public class CartController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CartDto> getCart(@PathVariable UUID id) {
+    public ResponseEntity<CartDto> getCart(@PathVariable UUID id) throws OneBoxApplicationException {
         return ResponseEntity.ok(cartService.getCartById(id));
     }
     @PostMapping("")
@@ -33,16 +35,16 @@ public class CartController {
     }
 
     @PutMapping("/{id}/product/{idProduct}")
-    public ResponseEntity<CartDto> addProductToCart(@PathVariable UUID id,@PathVariable UUID idProduct) {
+    public ResponseEntity<CartDto> addProductToCart(@PathVariable UUID id,@PathVariable UUID idProduct) throws OneBoxApplicationException {
         return ResponseEntity.accepted().body(cartService.addProductToCart(id,idProduct));
     }
     @DeleteMapping("/{id}/product/{idProduct}")
-    public ResponseEntity<CartDto> removeProductToCart(@PathVariable UUID id,@PathVariable UUID idProduct) {
+    public ResponseEntity<CartDto> removeProductToCart(@PathVariable UUID id,@PathVariable UUID idProduct) throws OneBoxApplicationException {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(cartService.removeProductToCart(id,idProduct));
     }
 
     @DeleteMapping("/{id}")
-    public  ResponseEntity<String>  deleteCart(@PathVariable UUID id) {
+    public  ResponseEntity<String>  deleteCart(@PathVariable UUID id) throws OneBoxApplicationException {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(cartService.deleteCartById(id));
     }
 

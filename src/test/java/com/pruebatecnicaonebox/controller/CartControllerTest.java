@@ -37,11 +37,6 @@ class CartControllerTest {
     @Autowired
     private ProductRepository productRepository;
 
-    private Cart exampleCart;
-
-    private Product exampleProduct1;
-    private Product exampleProduct2;
-
 
     @Test
     void getCart() throws Exception {
@@ -111,15 +106,15 @@ class CartControllerTest {
     @Test
     void removeProductToCart() throws Exception {
 
-        exampleProduct1= productRepository.save(
+        Product exampleProduct1 = productRepository.save(
                 Product.builder().amount(3.0).description("test").build()
         );
 
-        exampleProduct2 = productRepository.save(
+        Product exampleProduct2 = productRepository.save(
                 Product.builder().amount(4.0).description("test2").build()
         );
 
-        exampleCart = cartRepository.save(Cart.builder().productList(Arrays.asList(exampleProduct1,exampleProduct2)).build());
+        Cart exampleCart = cartRepository.save(Cart.builder().productList(Arrays.asList(exampleProduct1, exampleProduct2)).build());
 
 
         Assertions.assertTrue(cartRepository.existsById(exampleCart.getId()));

@@ -3,6 +3,8 @@ package com.pruebatecnicaonebox.controller;
 import com.pruebatecnicaonebox.model.Product;
 import com.pruebatecnicaonebox.model.Product;
 import com.pruebatecnicaonebox.model.dto.ProductDto;
+import com.pruebatecnicaonebox.model.exceptions.NotFoundException;
+import com.pruebatecnicaonebox.model.exceptions.OneBoxApplicationException;
 import com.pruebatecnicaonebox.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,7 +26,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProductDto> getProduct(@PathVariable UUID id) {
+    public ResponseEntity<ProductDto> getProduct(@PathVariable UUID id) throws OneBoxApplicationException {
         return ResponseEntity.ok(productService.getProductById(id));
     }
     @PostMapping("")
@@ -32,7 +34,7 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.createProduct(productDto));
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<String>  deleteProduct(@PathVariable UUID id) {
+    public ResponseEntity<String>  deleteProduct(@PathVariable UUID id) throws OneBoxApplicationException {
         return ResponseEntity.ok(productService.deleteProductById(id));
     }
 
