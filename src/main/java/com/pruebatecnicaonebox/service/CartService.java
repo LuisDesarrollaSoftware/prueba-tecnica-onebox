@@ -1,6 +1,5 @@
 package com.pruebatecnicaonebox.service;
 
-import com.pruebatecnicaonebox.model.Cart;
 import com.pruebatecnicaonebox.model.dto.CartDto;
 import com.pruebatecnicaonebox.model.exceptions.NotFoundException;
 

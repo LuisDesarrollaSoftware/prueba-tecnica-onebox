@@ -2,7 +2,6 @@ package com.pruebatecnicaonebox.model.dto;
 
 import lombok.*;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;

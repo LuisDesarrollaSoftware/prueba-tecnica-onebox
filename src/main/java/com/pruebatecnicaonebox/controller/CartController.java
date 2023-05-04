@@ -1,8 +1,6 @@
 package com.pruebatecnicaonebox.controller;
 
-import com.pruebatecnicaonebox.model.Cart;
 import com.pruebatecnicaonebox.model.dto.CartDto;
-import com.pruebatecnicaonebox.model.exceptions.NotFoundException;
 import com.pruebatecnicaonebox.model.exceptions.OneBoxApplicationException;
 import com.pruebatecnicaonebox.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;

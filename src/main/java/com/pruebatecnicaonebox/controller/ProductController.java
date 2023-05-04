@@ -1,9 +1,6 @@
 package com.pruebatecnicaonebox.controller;
 
-import com.pruebatecnicaonebox.model.Product;
-import com.pruebatecnicaonebox.model.Product;
 import com.pruebatecnicaonebox.model.dto.ProductDto;
-import com.pruebatecnicaonebox.model.exceptions.NotFoundException;
 import com.pruebatecnicaonebox.model.exceptions.OneBoxApplicationException;
 import com.pruebatecnicaonebox.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
