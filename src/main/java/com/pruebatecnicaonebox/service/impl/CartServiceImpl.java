@@ -21,7 +21,7 @@ import java.util.UUID;
 @EnableScheduling
 public class CartServiceImpl implements CartService {
 
-    private static final long MAX_INACTIVE_TIME = 60000;
+    private static final long MAX_INACTIVE_TIME = 600000;
 
     @Autowired
     private CartRepository cartRepository;
